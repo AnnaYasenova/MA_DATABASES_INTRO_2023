@@ -37,6 +37,12 @@ WHERE rental_rate > 3;
    5. З таблиці фільмів виведіть інформацію про фільми з рейтингом "G", "PG", "R".
       Колонки які потрібно вивести: назва, опис і рейтинг.
 */
+SELECT
+    title,
+    description,
+    rating
+FROM film
+WHERE rating IN ("G", "PG", "R");
 
 /*
    6. Виведіть всі записи з таблиці film_text в описі яких є слово database.
