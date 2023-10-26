@@ -55,6 +55,9 @@ WHERE description LIKE "%database%";
    7. Виведіть всю інформацію про фільми, в яких тривалість прокату рівна 3,
       а replacement_cost менша ніж 12 доларів.
 */
+SELECT *
+FROM film
+WHERE rental_duration = 3 AND replacement_cost < 12;
 
 /*
    8. Виведіть всю інформацію про фільми з рейтингом "G" і replacement_cost більшою ніж 15 доларів.
