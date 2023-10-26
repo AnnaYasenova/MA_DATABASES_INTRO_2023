@@ -85,6 +85,12 @@ WHERE length < 60 OR length > 90;
       rental rate не менша 4,
       а також в special features наявні Trailers або Commentaries
 */
+SELECT title
+FROM film
+WHERE
+    rental_duration IN (6, 7)
+    AND rental_rate >= 4
+    AND (special_features LIKE "Trailers" OR special_features LIKE "Commentaries");
 
 /*
   12. Виведіть всі фільми які або мають рейтинг G і тривалість більшу ніж 60 хвилин,
