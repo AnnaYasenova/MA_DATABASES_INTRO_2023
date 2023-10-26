@@ -62,6 +62,9 @@ WHERE rental_duration = 3 AND replacement_cost < 12;
 /*
    8. Виведіть всю інформацію про фільми з рейтингом "G" і replacement_cost більшою ніж 15 доларів.
 */
+SELECT *
+FROM film
+WHERE rating = "G" AND replacement_cost > 15;
 
 /*
    9. Виведіть всю інформацію про фільми з тривалістю від 60 до 90 хвилин включно.
