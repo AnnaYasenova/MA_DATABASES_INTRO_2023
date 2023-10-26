@@ -47,6 +47,9 @@ WHERE rating IN ("G", "PG", "R");
 /*
    6. Виведіть всі записи з таблиці film_text в описі яких є слово database.
 */
+SELECT *
+FROM film_text
+WHERE description LIKE "%database%";
 
 /*
    7. Виведіть всю інформацію про фільми, в яких тривалість прокату рівна 3,
