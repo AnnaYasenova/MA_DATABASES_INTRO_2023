@@ -96,3 +96,8 @@ WHERE
   12. Виведіть всі фільми які або мають рейтинг G і тривалість більшу ніж 60 хвилин,
       або мають рейтинг R і містять Commentaries в special features
 */
+SELECT *
+FROM film
+WHERE
+    (rating = "G" AND length > 60)
+    OR (rating = "R" AND special_features LIKE "%Commentaries%")
