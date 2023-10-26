@@ -18,6 +18,12 @@ FROM customer;
       Назви в результуючому запиті: "Address", "District", "Postal Code".
       Відсортуйте результат за колонкою district (за зростанням) та address (за спаданням).
 */
+SELECT
+    address AS "Address",
+    district AS "District",
+    postal_code AS "Postal Code"
+FROM address
+ORDER BY district, address DESC;
 
 /*
    4. З таблиці фільмів виведіть назву фільму і ціну прокату таких фільмів,
