@@ -74,7 +74,8 @@ select title from film
 where
 	rental_duration in (6, 7) and
     rental_rate > 4 and
-    special_features like '%Trailers або Commentaries%';
+    special_features like '%Trailers%' or
+    special_features like '%Commentaries%';
 
 
 -- Виведіть всі фільми які або мають рейтинг G і тривалість більшу ніж 60
