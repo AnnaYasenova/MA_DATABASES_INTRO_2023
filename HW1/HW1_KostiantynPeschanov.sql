@@ -51,21 +51,27 @@ select * from film_text where title like '%DATABASE%';
 -- Виведіть всю інформацію про фільми, в яких тривалість прокату рівна 3, а
 -- replacement_cost менша ніж 12 доларів.
 select * from film
-where rental_duration = 3 and replacement_cost > 12;
+where
+    rental_duration = 3 and
+    replacement_cost > 12;
 
 
 -- Виведіть всю інформацію про фільми з рейтингом “G” і replacement_cost
 -- більшою ніж 15 доларів.
 select * from film
-where rating = 'G' and replacement_cost > 15;
+where
+    rating = 'G' and
+    replacement_cost > 15;
 
 
 -- Виведіть всю інформацію про фільми з тривалістю від 60 до 90 хвилин включно.
-select * from film where length between 60 and 90;
+select * from film
+where length between 60 and 90;
 
 
 -- Виведіть всю інформацію про фільми з тривалістю меншою за 60 хвилин або більшою за 90 хвилин.
-select * from film where length < 60 or length > 90;
+select * from film
+where length < 60 or length > 90;
 
 
 -- Виведіть назви всіх фільмів в яких rental duration рівна 6 або 7, rental rate не
@@ -74,8 +80,8 @@ select title from film
 where
 	rental_duration in (6, 7) and
     rental_rate > 4 and
-    special_features like '%Trailers%' or
-    special_features like '%Commentaries%';
+    (special_features like '%Trailers%' or
+    special_features like '%Commentaries%');
 
 
 -- Виведіть всі фільми які або мають рейтинг G і тривалість більшу ніж 60
