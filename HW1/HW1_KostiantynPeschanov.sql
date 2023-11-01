@@ -22,7 +22,7 @@ select
     district as 'District',
     postal_code as 'Postal Code'
 from address
-order by district desc, address;
+order by district, address desc;
 
 
 -- З таблиці фільмів виведіть назву фільму і ціну прокату таких фільмів, ціна
