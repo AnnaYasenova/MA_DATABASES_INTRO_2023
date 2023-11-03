@@ -1,6 +1,19 @@
 /*
     1. Вивести адресу і місто до якого відноситься ця адреса. (таблиці address, city).
 */
+SELECT a.address, c.city
+FROM address AS a
+JOIN city AS c
+    ON a.city_id = c.city_id;
+
+SELECT
+    a.address,
+    (
+        SELECT city
+        FROM city AS c
+        WHERE a.city_id = c.city_id
+    ) AS city
+FROM address AS a;
 
 /*
     2. Вивести список міст Аргентини і Австрії. (таблиці city, country). Відсортувати за алфавітом.
