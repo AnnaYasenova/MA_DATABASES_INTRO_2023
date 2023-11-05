@@ -39,6 +39,58 @@ ORDER BY ci.city;
        (використати таблиці actor, film_actor, film_category, category).
 */
 
+-- The WITH clause was spied on in class work.
+-- I use it here to avoid showing the actor_id in the final result.
+WITH actors_cte AS (
+    SELECT DISTINCT
+        a.first_name,
+        a.last_name,
+        a.actor_id -- I am forced to use actor_id to get the correct result.
+    FROM actor AS a
+    JOIN film_actor AS fa
+        ON a.actor_id = fa.actor_id
+    JOIN film_category AS fc
+        ON fa.film_id = fc.film_id
+    JOIN category AS c
+        ON fc.category_id = c.category_id
+    WHERE c.name IN ('Music', 'Sports')
+)
+SELECT first_name, last_name
+FROM actors_cte;
+
+-- Does it make any sense to change the order of the joined tables?
+-- For example, if the JOINs from the previous example are written as:
+SELECT DISTINCT
+    a.first_name,
+    a.last_name,
+    a.actor_id
+FROM category AS c
+JOIN film_category AS fc
+    ON fc.category_id = c.category_id
+JOIN film_actor AS fa
+    ON fa.film_id = fc.film_id
+JOIN actor AS a
+    ON fa.actor_id = a.actor_id
+WHERE c.name IN ('Music', 'Sports');
+
+SELECT
+    a.first_name,
+    a.last_name
+FROM actor AS a
+WHERE a.actor_id IN (
+    SELECT fa.actor_id
+    FROM film_actor AS fa
+    WHERE fa.film_id IN (
+        SELECT fc.film_id
+        FROM film_category AS fc
+        WHERE fc.category_id IN (
+            SELECT c.category_id
+            FROM category AS c
+            WHERE c.name IN ('Music', 'Sports')
+        )
+    )
+);
+
 /*
     4. Вивести всі фільми, видані в прокат менеджером Mike Hillyer.
        Для визначення менеджера використати таблицю staff і поле staff_id;
