@@ -207,12 +207,41 @@ WHERE p.customer_id IN (
     SELECT c.customer_id
     FROM customer AS c
     WHERE c.active = 1
-)
+);
 
 /*
     8. Вивести прізвище та ім’я клієнтів, payment_date i amount для активних клієнтів
        (поле active таблиці customer).
 */
+SELECT
+    c.last_name,
+    c.first_name,
+    p.payment_date,
+    p.amount
+FROM customer AS c
+JOIN payment AS p
+    ON p.customer_id = c.customer_id
+WHERE c.active = 1;
+
+SELECT
+    (
+        SELECT c.last_name
+        FROM customer AS c
+        WHERE c.customer_id = p.payment_id
+    ) AS last_name,
+    (
+        SELECT c.first_name
+        FROM customer AS c
+        WHERE c.customer_id = p.payment_id
+    ) AS first_name,
+    p.payment_date,
+    p.amount
+FROM payment AS p
+WHERE p.customer_id IN (
+    SELECT c.customer_id
+    FROM customer AS c
+    WHERE c.active = 1
+);
 
 /*
     9. Вивести прізвище та ім'я користувачів (customer),
