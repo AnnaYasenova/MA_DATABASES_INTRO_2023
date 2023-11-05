@@ -164,6 +164,29 @@ WHERE c.store_id IN (
     6. Вивести назву фільму, тривалість фільму і мову фільму.
        Фільтр: мова Англійська або італійська. (таблиці film, language).
 */
+SELECT
+    f.title,
+    f.length,
+    l.name AS Language
+FROM film AS f
+JOIN language AS l
+    ON f.language_id = l.language_id
+WHERE l.name IN ('English', 'Italian');
+
+SELECT
+    f.title,
+    f.length,
+    (
+        SELECT l.name
+        FROM language AS l
+        WHERE l.language_id = f.language_id
+    ) AS Language
+FROM film AS f
+WHERE f.language_id IN (
+    SELECT l.language_id
+    FROM language AS l
+    WHERE l.name IN ('English', 'Italian')
+);
 
 /*
     7. Вивести payment_date i amount всіх записів активних клієнтів (поле active таблиці customer).
