@@ -18,6 +18,21 @@ FROM address AS a;
 /*
     2. Вивести список міст Аргентини і Австрії. (таблиці city, country). Відсортувати за алфавітом.
 */
+SELECT ci.city
+FROM city AS ci
+JOIN country AS co
+    ON ci.country_id = co.country_id
+WHERE co.country IN ('Argentina', 'Austria')
+ORDER BY ci.city;
+
+SELECT ci.city
+FROM city AS ci
+WHERE ci.country_id IN (
+    SELECT co.country_id
+    FROM country AS co
+    WHERE co.country IN ('Argentina', 'Austria')
+)
+ORDER BY ci.city;
 
 /*
     3. Вивести список акторів, що знімалися в фільмах категорій Music, Sports.
