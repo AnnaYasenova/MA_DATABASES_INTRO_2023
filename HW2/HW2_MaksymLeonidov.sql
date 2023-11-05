@@ -191,6 +191,23 @@ WHERE f.language_id IN (
 /*
     7. Вивести payment_date i amount всіх записів активних клієнтів (поле active таблиці customer).
 */
+SELECT
+    p.payment_date,
+    p.amount
+FROM payment AS p
+JOIN customer AS c
+    ON c.customer_id = p.customer_id
+WHERE c.active = 1;
+
+SELECT
+    p.payment_date,
+    p.amount
+FROM payment AS p
+WHERE p.customer_id IN (
+    SELECT c.customer_id
+    FROM customer AS c
+    WHERE c.active = 1
+)
 
 /*
     8. Вивести прізвище та ім’я клієнтів, payment_date i amount для активних клієнтів
