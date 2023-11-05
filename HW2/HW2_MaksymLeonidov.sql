@@ -248,6 +248,35 @@ WHERE p.customer_id IN (
        які здійснювали оплату в розмірі більшому, ніж 10 доларів (таблиця payment, поле amount),
        також вивести amount, дату оплати. Відсортувати за датою оплати.
 */
+SELECT
+    c.last_name,
+    c.first_name,
+    p.amount,
+    p.payment_date
+FROM customer AS c
+JOIN payment AS p
+    ON p.customer_id = c.customer_id
+WHERE p.amount > 10
+ORDER BY p.payment_date;
+
+SELECT
+    (
+        SELECT
+            c.last_name
+        FROM customer AS c
+        WHERE c.customer_id = p.customer_id
+    ) AS last_name,
+    (
+        SELECT
+            c.first_name
+        FROM customer AS c
+        WHERE c.customer_id = p.customer_id
+    ) AS first_name,
+    p.amount,
+    p.payment_date
+FROM payment AS p
+WHERE p.amount > 10
+ORDER BY p.payment_date;
 
 /*
     10. Вивести прізвище та ім’я, а також дату останнього оновлення запису (поле last_update)
