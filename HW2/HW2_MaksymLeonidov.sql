@@ -134,7 +134,7 @@ SELECT
     last_update,
     'Actor' AS person_appointment
 FROM actor
-UNION
+UNION ALL
 SELECT
     last_name,
     first_name,
@@ -145,3 +145,14 @@ FROM customer;
 /*
     11. Вивести всі унікальні прізвища таблиць actor, customer, staff.
 */
+SELECT
+    last_name
+FROM actor
+UNION
+SELECT
+    last_name
+FROM customer
+UNION
+SELECT
+    last_name
+FROM staff;
