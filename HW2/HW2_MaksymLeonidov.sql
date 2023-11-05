@@ -128,6 +128,19 @@ WHERE a.actor_id IN (
         для людей наявних в таблицях actor, customer.
         Також в результуючому запиті передбачити можливість розрізняти акторів і користувачів.
 */
+SELECT
+    last_name,
+    first_name,
+    last_update,
+    'Actor' AS person_appointment
+FROM actor
+UNION
+SELECT
+    last_name,
+    first_name,
+    last_update,
+    'Customer' AS person_appointment
+FROM customer;
 
 /*
     11. Вивести всі унікальні прізвища таблиць actor, customer, staff.
