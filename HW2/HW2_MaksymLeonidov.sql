@@ -97,6 +97,33 @@ WHERE a.actor_id IN (
        для визначення фільму скористатися таблицею inventory (поле inventory_id),
        і таблиці film (поле film_id).
 */
+SELECT DISTINCT
+    f.title
+FROM film AS f
+JOIN inventory AS i
+    ON f.film_id = i.film_id
+JOIN store
+    ON store.store_id = i.store_id
+JOIN staff
+    ON staff.staff_id = store.manager_staff_id
+WHERE staff.first_name = 'Mike' AND staff.last_name = 'Hillyer';
+
+SELECT
+    f.title
+FROM film AS f
+WHERE f.film_id IN (
+    SELECT i.film_id
+    FROM inventory AS i
+    WHERE i.store_id IN (
+        SELECT store.store_id
+        FROM store
+        WHERE store.manager_staff_id IN (
+            SELECT staff.staff_id
+            FROM staff
+            WHERE staff.first_name = 'Mike' AND staff.last_name = 'Hillyer'
+        )
+    )
+);
 
 /*
     5. Вивести користувачів, що брали в оренду фільми
