@@ -129,6 +129,36 @@ WHERE f.film_id IN (
     5. Вивести користувачів, що брали в оренду фільми
        SWEETHEARTS SUSPECTS, TEEN APOLLO, TIMBERLAND SKY, TORQUE BOUND.
 */
+SELECT DISTINCT
+    c.first_name,
+    c.last_name,
+    c.customer_id
+FROM customer AS c
+JOIN store AS s
+    ON s.store_id = c.store_id
+JOIN inventory AS i
+    ON i.store_id = s.store_id
+JOIN film AS f
+    ON f.film_id = i.film_id
+WHERE f.title IN ('SWEETHEARTS SUSPECTS', 'TEEN APOLLO', 'TIMBERLAND SKY', 'TORQUE BOUND');
+
+SELECT
+    c.first_name,
+    c.last_name
+FROM customer AS c
+WHERE c.store_id IN (
+    SELECT s.store_id
+    FROM store AS s
+    WHERE s.store_id IN (
+        SELECT i.store_id
+        FROM inventory AS i
+        WHERE i.film_id IN (
+            SELECT f.film_id
+            FROM film AS f
+            WHERE f.title IN ('SWEETHEARTS SUSPECTS', 'TEEN APOLLO', 'TIMBERLAND SKY', 'TORQUE BOUND')
+        )
+    )
+);
 
 /*
     6. Вивести назву фільму, тривалість фільму і мову фільму.
