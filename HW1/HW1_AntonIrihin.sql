@@ -2,7 +2,7 @@ use  sakila;
 
 select * from sakila. customer;
 
-Select first_name, Last_name, Email from sakila. customer;
+Select first_name as "First Name", Last_name as "Last Name", Email as "Email" from sakila. customer;
 
 select address, district, Postal_code from sakila. address;
 
@@ -21,6 +21,6 @@ Select * from film where length between 60 and 90;
 
 select * from film where length <60 or length >90;
 
-select * from film where rental_duration =6 or rental_duration =7 and rental_rate >=4 and special_features like "%Trailers%" and special_features like "%Commentaries%";
+select * from film where (rental_duration =6 or rental_duration =7) and (rental_rate >=4) and (special_features like "%Trailers%" and special_features like "%Commentaries%");
 
-select * from film where rating = "G" and length >= 60 or rating = "R" and special_features like "%Commentaries%";
+select * from film where (rating = "G" and length >= 60) or (rating = "R" and special_features like "%Commentaries%");
