@@ -141,10 +141,10 @@ WHERE customer_id IN (
 #Вивести прізвище та ім’я клієнтів, payment_date i amount для активних
 #клієнтів (поле active таблиці customer).
 
-SELECT customer.first_name, customer.last_name, payment.payment_date, payment.amount
-FROM customer
-JOIN payment ON customer.customer_id = payment.customer_id
-WHERE customer.active = 1;
+SELECT c.first_name, c.last_name, p.payment_date, p.amount
+FROM customer c, payment p
+WHERE c.customer_id = p.customer_id
+AND c.active = 1;
 
 SELECT customer.first_name, customer.last_name, payment.payment_date, payment.amount
 FROM customer
@@ -165,15 +165,18 @@ JOIN payment ON customer.customer_id = payment.customer_id
 WHERE payment.amount > 10
 ORDER BY payment.payment_date;
 
-SELECT customer.first_name, customer.last_name, payment.amount, payment.payment_date
-FROM customer
-JOIN payment ON customer.customer_id = payment.customer_id
-WHERE payment.customer_id IN (
+SELECT c.first_name, c.last_name, p.amount, p.payment_date
+FROM customer c
+WHERE c.customer_id IN (
   SELECT customer_id
   FROM payment
   WHERE amount > 10
 )
-ORDER BY payment.payment_date;
+ORDER BY (
+  SELECT payment_date
+  FROM payment p
+  WHERE p.customer_id = c.customer_id
+);
 
 #Вивести прізвище та ім’я, а також дату останнього оновлення запису (поле
 #last_update) для людей наявних в таблицях actor, customer. Також в
