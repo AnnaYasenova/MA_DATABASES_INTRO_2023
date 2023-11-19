@@ -105,7 +105,7 @@ order by
 select
 	case
 		when rental_rate < 2 then 'low_rental_rate'
-        when rental_rate >= 2 and rental_rate <= 4 then 'medium_rental_rate'
+        when rental_rate between 2 and 4 then 'medium_rental_rate'
         when rental_rate > 4 then 'high_rental_rate'
 	end as rate_category,
     count(*) as rate_category_count
