@@ -102,11 +102,11 @@ SELECT DISTINCT
 FROM film AS f
 JOIN inventory AS i
     ON f.film_id = i.film_id
-JOIN store
-    ON store.store_id = i.store_id
-JOIN staff
-    ON staff.staff_id = store.manager_staff_id
-WHERE staff.first_name = 'Mike' AND staff.last_name = 'Hillyer';
+JOIN rental AS r
+    ON r.inventory_id = i.inventory_id
+JOIN staff AS s
+    ON s.staff_id = r.staff_id
+WHERE s.first_name = 'Mike' AND s.last_name = 'Hillyer';
 
 SELECT
     f.title
@@ -114,10 +114,10 @@ FROM film AS f
 WHERE f.film_id IN (
     SELECT i.film_id
     FROM inventory AS i
-    WHERE i.store_id IN (
-        SELECT store.store_id
-        FROM store
-        WHERE store.manager_staff_id IN (
+    WHERE i.inventory_id IN (
+        SELECT rental.inventory_id
+        FROM rental
+        WHERE rental.staff_id IN (
             SELECT staff.staff_id
             FROM staff
             WHERE staff.first_name = 'Mike' AND staff.last_name = 'Hillyer'
@@ -134,10 +134,10 @@ SELECT DISTINCT
     c.last_name,
     c.customer_id
 FROM customer AS c
-JOIN store AS s
-    ON s.store_id = c.store_id
+JOIN rental AS r
+    ON r.customer_id = c.customer_id
 JOIN inventory AS i
-    ON i.store_id = s.store_id
+    ON i.inventory_id = r.inventory_id
 JOIN film AS f
     ON f.film_id = i.film_id
 WHERE f.title IN ('SWEETHEARTS SUSPECTS', 'TEEN APOLLO', 'TIMBERLAND SKY', 'TORQUE BOUND');
@@ -146,11 +146,11 @@ SELECT
     c.first_name,
     c.last_name
 FROM customer AS c
-WHERE c.store_id IN (
-    SELECT s.store_id
-    FROM store AS s
-    WHERE s.store_id IN (
-        SELECT i.store_id
+WHERE c.customer_id IN (
+    SELECT r.customer_id
+    FROM rental AS r
+    WHERE r.inventory_id IN (
+        SELECT i.inventory_id
         FROM inventory AS i
         WHERE i.film_id IN (
             SELECT f.film_id
