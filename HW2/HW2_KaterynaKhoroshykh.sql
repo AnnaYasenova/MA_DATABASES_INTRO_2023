@@ -132,8 +132,8 @@ select first_name, last_name, last_update, "actor" as catergory from actor
 union
 select first_name, last_name, last_update, "customer" as catergory from customer;
 
-select first_name, last_name, last_update, "actor" as catergory from actor
+select last_name from actor
 union
-select first_name, last_name, last_update, "customer" as catergory from customer
+select last_name from customer
 union
-select null as email, first_name, last_name, "staff" as catergory from staff;
+select last_name from staff;
