@@ -42,7 +42,7 @@ where a.actor_id in
 		where fc.category_id in
 		(select c.category_id from category as c
         where name in ('Music','Sports')
-        )
+        	)
 	)
 );
 
